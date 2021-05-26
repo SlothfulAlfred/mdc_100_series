@@ -36,8 +36,7 @@ class HomePage extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             // TODO: Adjust card heights
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // TOOD: Center items on the card
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 18.0 / 11.0,
@@ -50,13 +49,15 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
                   child: Column(
-                    // TODO: Allign labels to bottom and center
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
                         product.name,
-                        style: theme.textTheme.headline6,
+                        style: theme.textTheme.button,
                         maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 12.0),
                       Text(
