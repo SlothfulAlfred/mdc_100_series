@@ -53,23 +53,31 @@ final ThemeData _kShrineTheme = _buildShrineTheme();
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    colorScheme: base.colorScheme.copyWith(
-      primary: kShrinePink300,
-      onPrimary: kShrineBrown900,
-      secondary: kShrineBrown900,
-      error: kShrineErrorRed,
-    ),
-    textTheme: _buildShrineTextTheme(base.textTheme),
-    primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
-    textSelectionTheme: TextSelectionThemeData(
-      selectionColor: kShrinePink100,
-    ),
-    appBarTheme: base.appBarTheme.copyWith(
-      backwardsCompatibility: false,
-    ),
-    // TODO: Add the icon themes (103)
-    // TODO: Decorate the inputs (103)
-  );
+      colorScheme: base.colorScheme.copyWith(
+        primary: kShrinePink300,
+        onPrimary: kShrineBrown900,
+        secondary: kShrineBrown900,
+        error: kShrineErrorRed,
+      ),
+      textTheme: _buildShrineTextTheme(base.textTheme),
+      primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: kShrinePink100,
+      ),
+      appBarTheme: base.appBarTheme.copyWith(
+        backwardsCompatibility: false,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: kShrineBrown900,
+          ),
+        ),
+        border: OutlineInputBorder(),
+      )
+      // TODO: Add the icon themes (103)
+      );
 }
 
 TextTheme _buildShrineTextTheme(TextTheme base) {

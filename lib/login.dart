@@ -22,6 +22,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _usernameFocus = FocusNode();
+  final _passwordFocus = FocusNode();
+  final _unfocusedColor = Colors.grey[600];
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameFocus.addListener(() {
+      setState() {}
+    });
+    _passwordFocus.addListener(() {
+      setState() {}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +57,18 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 120.0),
             // TODO: Wrap Username with AccentColorOverride (103)
-            // TODO: Remove filled: true values (103)
             // TODO: Wrap Password with AccentColorOverride (103)
             // [name]
             TextField(
               controller: _usernameController,
+              focusNode: _usernameFocus,
               decoration: InputDecoration(
-                filled: true,
                 labelText: "Username",
+                labelStyle: TextStyle(
+                  color: _usernameFocus.hasFocus
+                      ? Theme.of(context).colorScheme.secondary
+                      : _unfocusedColor,
+                ),
               ),
             ),
             // spacer
@@ -58,9 +76,14 @@ class _LoginPageState extends State<LoginPage> {
             // [password]
             TextField(
               controller: _passwordController,
+              focusNode: _passwordFocus,
               decoration: InputDecoration(
-                filled: true,
                 labelText: "Password",
+                labelStyle: TextStyle(
+                  color: _passwordFocus.hasFocus
+                      ? Theme.of(context).colorScheme.secondary
+                      : _unfocusedColor,
+                ),
               ),
               obscureText: true,
             ),
