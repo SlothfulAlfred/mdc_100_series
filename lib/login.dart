@@ -99,6 +99,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ElevatedButton(
                   child: Text("NEXT"),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      BeveledRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(7)),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                   },

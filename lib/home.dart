@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
     return products
         .map(
           (product) => Card(
+            elevation: 0.0,
             clipBehavior: Clip.antiAlias,
             // TODO: Adjust card heights
             child: Column(
