@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'supplemental/cut_corners_border.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -49,7 +50,7 @@ class ShrineApp extends StatelessWidget {
 }
 
 final ThemeData _kShrineTheme = _buildShrineTheme();
-// TODO: Build a Shrine Text Theme (103)
+
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
@@ -68,13 +69,13 @@ ThemeData _buildShrineTheme() {
         backwardsCompatibility: false,
       ),
       inputDecorationTheme: InputDecorationTheme(
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: CutCornersBorder(
           borderSide: BorderSide(
             width: 2,
             color: kShrineBrown900,
           ),
         ),
-        border: OutlineInputBorder(),
+        border: CutCornersBorder(),
       )
       // TODO: Add the icon themes (103)
       );
