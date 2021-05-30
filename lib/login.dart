@@ -56,8 +56,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: 120.0),
-            // TODO: Wrap Username with AccentColorOverride (103)
-            // TODO: Wrap Password with AccentColorOverride (103)
             // [name]
             TextField(
               controller: _usernameController,
@@ -87,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: true,
             ),
-            // TODO: Add button bar (101)
             ButtonBar(
               children: <Widget>[
                 TextButton(
