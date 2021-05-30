@@ -33,7 +33,8 @@ class _BackdropState extends State<Backdrop>
       children: [
         // TODO: Wrap backLayer in ExcludeSemantics Widget
         widget.backLayer,
-        widget.frontLayer,
+        // TODO: Add a PositionedTransition
+        _FrontLayer(child: widget.frontLayer),
       ],
     );
   }
@@ -73,6 +74,33 @@ class _BackdropState extends State<Backdrop>
     return Scaffold(
       appBar: appBar,
       body: _buildStack(),
+    );
+  }
+}
+
+class _FrontLayer extends StatelessWidget {
+  const _FrontLayer({
+    @required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 16.0,
+      shape: BeveledRectangleBorder(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(46)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // TODO: Add a GestureDetector
+          Expanded(
+            child: child,
+          )
+        ],
+      ),
     );
   }
 }
