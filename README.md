@@ -17,5 +17,10 @@ For help getting started with Flutter, view our online
 - Using the [AppBar] Widget to create a platform-agnostic app bar with action buttons and a title
 
 # MDC-103
+- Creating and using themes to customize app 
+- A glimpse at custom widgets like [AsymmetricView] and [CutCornerOutline] 
+- Consulting the definition of Widgets when unsure about usage 
+- Styling and customizing widget shapes and elevations
+
 
 # MDC-104
