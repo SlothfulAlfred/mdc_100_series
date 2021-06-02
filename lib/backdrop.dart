@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'model/product.dart';
+import 'login.dart';
 
 const double _kFlingVelocity = 2.0;
 
@@ -102,29 +103,35 @@ class _BackdropState extends State<Backdrop>
       brightness: Brightness.light,
       elevation: 0.0,
       titleSpacing: 0.0,
-      // TODO: Replace title with _BackdropTitle parameter
-      leading: IconButton(
-        icon: Icon(Icons.menu),
+      title: _BackdropTitle(
+        listenable: _controller.view,
+        frontTitle: widget.frontTitle,
+        backTitle: widget.backTitle,
         onPressed: _toggleBackLayerVisible,
       ),
-      title: Text('SHRINE'),
       actions: [
         IconButton(
           icon: Icon(
             Icons.search,
-            semanticLabel: "search",
+            semanticLabel: "login",
           ),
           onPressed: () {
-            // TODO: Add open login
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
           },
         ),
         IconButton(
           icon: Icon(
             Icons.tune,
-            semanticLabel: 'Filter',
+            semanticLabel: 'login',
           ),
           onPressed: () {
-            // TODO: Add filtering
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
           },
         ),
       ],
@@ -169,6 +176,83 @@ class _FrontLayer extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _BackdropTitle extends AnimatedWidget {
+  final VoidCallback onPressed;
+  final Widget frontTitle;
+  final Widget backTitle;
+  final Animation<double> _listenable;
+
+  const _BackdropTitle({
+    @required this.onPressed,
+    @required this.frontTitle,
+    @required this.backTitle,
+    @required Listenable listenable,
+  })  : _listenable = listenable,
+        super(listenable: listenable);
+
+  @override
+  Widget build(BuildContext context) {
+    final Animation<double> animation = _listenable;
+
+    return DefaultTextStyle(
+      style: Theme.of(context).primaryTextTheme.headline6,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      child: Row(children: <Widget>[
+        SizedBox(
+          width: 72,
+          child: IconButton(
+              padding: const EdgeInsets.only(right: 8.0),
+              onPressed: this.onPressed,
+              icon: Stack(children: <Widget>[
+                Opacity(
+                  opacity: animation.value,
+                  child: ImageIcon(
+                    AssetImage('assets/slanted_menu.png'),
+                  ),
+                ),
+                FractionalTranslation(
+                  translation: Tween<Offset>(
+                    begin: Offset.zero,
+                    end: Offset(1.0, 0.0),
+                  ).evaluate(animation),
+                  child: ImageIcon(AssetImage('assets/diamond.png')),
+                )
+              ])),
+        ),
+        Stack(children: <Widget>[
+          Opacity(
+            opacity: CurvedAnimation(
+              parent: ReverseAnimation(animation),
+              curve: Interval(0.5, 1),
+            ).value,
+            child: FractionalTranslation(
+              translation: Tween<Offset>(
+                begin: Offset.zero,
+                end: Offset(0.5, 0.0),
+              ).evaluate(animation),
+              child: backTitle,
+            ),
+          ),
+          Opacity(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: Interval(0.5, 1.0),
+            ).value,
+            child: FractionalTranslation(
+              translation: Tween<Offset>(
+                begin: Offset(-0.25, 0.0),
+                end: Offset.zero,
+              ).evaluate(animation),
+              child: frontTitle,
+            ),
+          ),
+        ])
+      ]),
     );
   }
 }
