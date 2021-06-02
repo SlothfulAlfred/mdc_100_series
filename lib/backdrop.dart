@@ -47,7 +47,10 @@ class _BackdropState extends State<Backdrop>
           excluding: _frontLayerVisible,
         ),
         PositionedTransition(
-          child: _FrontLayer(child: widget.frontLayer),
+          child: _FrontLayer(
+            child: widget.frontLayer,
+            onTap: _toggleBackLayerVisible,
+          ),
           rect: layerAnimation,
         ),
       ],
@@ -77,9 +80,20 @@ class _BackdropState extends State<Backdrop>
   }
 
   @override
-  dispose() {
+  void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(Backdrop old) {
+    super.didUpdateWidget(old);
+
+    if (widget.currentCategory != old.currentCategory) {
+      _toggleBackLayerVisible();
+    } else if (!_frontLayerVisible) {
+      _controller.fling(velocity: _kFlingVelocity);
+    }
   }
 
   @override
@@ -125,9 +139,11 @@ class _BackdropState extends State<Backdrop>
 
 class _FrontLayer extends StatelessWidget {
   const _FrontLayer({
+    this.onTap,
     @required this.child,
   });
 
+  final VoidCallback onTap;
   final Widget child;
 
   @override
@@ -140,7 +156,14 @@ class _FrontLayer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // TODO: Add a GestureDetector
+          GestureDetector(
+            onTap: onTap,
+            behavior: HitTestBehavior.opaque,
+            child: Container(
+              height: 40.0,
+              alignment: AlignmentDirectional.centerStart,
+            ),
+          ),
           Expanded(
             child: child,
           )
