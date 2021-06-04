@@ -206,23 +206,13 @@ class _BackdropTitle extends AnimatedWidget {
         SizedBox(
           width: 72,
           child: IconButton(
-              padding: const EdgeInsets.only(right: 8.0),
-              onPressed: this.onPressed,
-              icon: Stack(children: <Widget>[
-                Opacity(
-                  opacity: animation.value,
-                  child: ImageIcon(
-                    AssetImage('assets/slanted_menu.png'),
-                  ),
-                ),
-                FractionalTranslation(
-                  translation: Tween<Offset>(
-                    begin: Offset.zero,
-                    end: Offset(1.0, 0.0),
-                  ).evaluate(animation),
-                  child: ImageIcon(AssetImage('assets/diamond.png')),
-                )
-              ])),
+            padding: const EdgeInsets.only(right: 8.0),
+            onPressed: this.onPressed,
+            icon: AnimatedIcon(
+              progress: animation,
+              icon: AnimatedIcons.close_menu,
+            ),
+          ),
         ),
         Stack(children: <Widget>[
           Opacity(
@@ -254,5 +244,33 @@ class _BackdropTitle extends AnimatedWidget {
         ])
       ]),
     );
+  }
+}
+
+class BrandedIcon extends StatelessWidget {
+  const BrandedIcon({
+    Key key,
+    @required this.animation,
+  }) : super(key: key);
+
+  final Animation<double> animation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: <Widget>[
+      Opacity(
+        opacity: animation.value,
+        child: ImageIcon(
+          AssetImage('assets/slanted_menu.png'),
+        ),
+      ),
+      FractionalTranslation(
+        translation: Tween<Offset>(
+          begin: Offset.zero,
+          end: Offset(1.0, 0.0),
+        ).evaluate(animation),
+        child: ImageIcon(AssetImage('assets/diamond.png')),
+      )
+    ]);
   }
 }
