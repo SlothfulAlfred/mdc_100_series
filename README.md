@@ -24,3 +24,17 @@ For help getting started with Flutter, view our online
 
 
 # MDC-104
+- Using [Material] widgets to add shape 
+- Different methods of implementing animation such as using [Tween], AnimatedFoo, or Transition widgets 
+- Using [Stack] widgets to layer screens instead of navigating to a new route
+
+# Next Steps
+- [x] Add a page to display details about each product
+    * Learning points
+    * Using [Hero] Widgets to implement cross-page animations 
+- [ ] Add widget unit tests for custom widgets
+- [ ] Fully document all methods 
+- [ ] Add a cart / checkout page 
+- [ ] Use the Provider package to refactor some stateful widgets 
+- [ ] Refactor [ProductRepository] methods into async methods to better simulate a database 
+
