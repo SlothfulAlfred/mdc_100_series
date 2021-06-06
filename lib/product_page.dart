@@ -17,7 +17,7 @@ class ProductPage extends StatelessWidget {
     final sw = MediaQuery.of(context).size.width;
     final product = ProductsRepository.getById(id);
     final imageWidget = AspectRatio(
-        aspectRatio: 16 / 9,
+        aspectRatio: 12 / 12,
         child: Image.asset(
           product.assetName,
           package: product.assetPackage,
