@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:Shrine/supplemental/photo_hero.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -42,10 +43,17 @@ class ProductCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        AspectRatio(
-          aspectRatio: imageAspectRatio,
-          child: imageWidget,
-        ),
+        PhotoHero(
+            child: AspectRatio(
+              aspectRatio: imageAspectRatio,
+              child: imageWidget,
+            ),
+            id: product.id,
+            width: 200,
+            onTap: () {
+              var uri = '/product/${product.id}';
+              Navigator.pushNamed(context, uri);
+            }),
         SizedBox(
           height: kTextBoxHeight * MediaQuery.of(context).textScaleFactor,
           // width: 121.0,
