@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:meta/meta.dart';
 import 'model/product.dart';
 import 'login.dart';
@@ -208,10 +209,13 @@ class _BackdropTitle extends AnimatedWidget {
           child: IconButton(
             padding: const EdgeInsets.only(right: 8.0),
             onPressed: this.onPressed,
-            icon: AnimatedIcon(
+            icon: BrandedIcon(
+                animation:
+                    animation), /*AnimatedIcon(
               progress: animation,
               icon: AnimatedIcons.close_menu,
             ),
+            */
           ),
         ),
         Stack(children: <Widget>[
