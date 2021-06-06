@@ -22,6 +22,7 @@ import 'home.dart';
 import 'login.dart';
 import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
+import 'product_page.dart';
 
 class ShrineApp extends StatefulWidget {
   @override
@@ -60,15 +61,23 @@ class _ShrineAppState extends State<ShrineApp> {
   }
 
   Route<dynamic> _getRoute(RouteSettings settings) {
-    if (settings.name != '/login') {
-      return null;
+    if (settings.name == '/login') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => LoginPage(),
+        fullscreenDialog: true,
+      );
+    } else {
+      var uri = Uri.parse(settings.name);
+      if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'product') {
+        var id = uri.pathSegments[1];
+        return MaterialPageRoute(
+          builder: (context) => ProductPage(id: int.parse(id)),
+        );
+      }
     }
-
-    return MaterialPageRoute<void>(
-      settings: settings,
-      builder: (BuildContext context) => LoginPage(),
-      fullscreenDialog: true,
-    );
+    assert(false, 'Need to implement $settings.name');
+    return null;
   }
 }
 
