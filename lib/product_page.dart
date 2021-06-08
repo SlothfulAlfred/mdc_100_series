@@ -5,6 +5,11 @@ import 'colors.dart';
 import 'supplemental/photo_hero.dart';
 import 'model/products_repository.dart';
 
+/// A page that displays information about, and animates, a single
+/// product.
+///
+/// The [id] parameter should be within the range of
+/// [ProductsRepository.allProducts].
 class ProductPage extends StatelessWidget {
   final int id;
 
@@ -30,6 +35,7 @@ class ProductPage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     final Widget appbar = AppBar(
+        // Looks very similar to the logo in the home page.
         title: Row(
           children: [
             ImageIcon(AssetImage('assets/diamond.png')),

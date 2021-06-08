@@ -6,11 +6,27 @@ import 'login.dart';
 
 const double _kFlingVelocity = 2.0;
 
+/// The multi-layered home page comprised of a [CategoryMenuPage] under
+/// an [AsymmetricView].
+///
+/// This widget controls the animations of all its children using an
+/// [AnimationController].
 class Backdrop extends StatefulWidget {
+  /// The current selected category of items to display.
   final Category currentCategory;
+
+  /// The initially visible layer of the widget.
   final Widget frontLayer;
+
+  /// The layer behind [frontLayer], designed to be a menu.
   final Widget backLayer;
+
+  /// The [AppBar]'s [title] parameter to be shown when
+  /// [frontLayer] is visible.
   final Widget frontTitle;
+
+  /// The [AppBar]'s [title] parameter to be shown when
+  /// [backLayer] is visible.
   final Widget backTitle;
 
   const Backdrop({
@@ -30,6 +46,11 @@ class _BackdropState extends State<Backdrop>
   final GlobalKey _backdropKey = GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
 
+  /// Describes the stack of [widget.frontLayer] and [widget.backLayer]
+  /// with a simple animation.
+  ///
+  /// Uses a [RelativeRectTween] and a [PositionedTransition] to
+  /// smoothly alternate between the two widgets on the stack.
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     const double layerTitleHeight = 48.0;
     final Size layerSize = constraints.biggest;
@@ -59,18 +80,24 @@ class _BackdropState extends State<Backdrop>
     );
   }
 
+  /// The visibility of [widget.frontLayer].
   bool get _frontLayerVisible {
     final AnimationStatus status = _controller.status;
     return status == AnimationStatus.completed ||
         status == AnimationStatus.forward;
   }
 
+  /// Toggles the visibility of [widget.backLayer].
+  ///
+  /// Drives the same animation but with different velocities depending
+  /// on [_frontLayerVisible].
   void _toggleBackLayerVisible() {
     _controller.fling(
       velocity: _frontLayerVisible ? -_kFlingVelocity : _kFlingVelocity,
     );
   }
 
+  /// Initializes the [AnimationController].
   @override
   void initState() {
     super.initState();
@@ -81,12 +108,14 @@ class _BackdropState extends State<Backdrop>
     );
   }
 
+  /// Disposes of the [AnimationController].
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// Toggles menu visibility if a new category is selected.
   @override
   void didUpdateWidget(Backdrop old) {
     super.didUpdateWidget(old);
@@ -105,6 +134,8 @@ class _BackdropState extends State<Backdrop>
       elevation: 0.0,
       titleSpacing: 0.0,
       title: _BackdropTitle(
+        // [_controller] is passed to [_BackdropTitle] to drive
+        // the animations.
         listenable: _controller.view,
         frontTitle: widget.frontTitle,
         backTitle: widget.backTitle,
@@ -116,6 +147,7 @@ class _BackdropState extends State<Backdrop>
             Icons.search,
             semanticLabel: "login",
           ),
+          // Leads to the login page on press
           onPressed: () {
             Navigator.push(
               context,
@@ -140,11 +172,19 @@ class _BackdropState extends State<Backdrop>
     );
     return Scaffold(
       appBar: appBar,
+      // A [LayoutBuilder] is used here to prevent render overflow
+      // errors when the menu is brought down, as this rebuilds the
+      // layout whenever the constraints are changed.
       body: LayoutBuilder(builder: _buildStack),
     );
   }
 }
 
+/// The stylized home page of the Shrine app.
+///
+/// Includes a [BeveledRectangleBorder] to cut the top-left corner
+/// and a [GestureDetector] that allows menu opening by clicking
+/// the top of the screen, just under the appbar.
 class _FrontLayer extends StatelessWidget {
   const _FrontLayer({
     this.onTap,
@@ -181,6 +221,13 @@ class _FrontLayer extends StatelessWidget {
   }
 }
 
+/// An animated title for the appbar, different from [BrandedIcon].
+///
+/// This widget manages the animations for the title of the appbar
+/// when opening and closing the menu. [Opacity] and [FractionalTranslation]
+/// widgets are used to fly and fade in/out the titles when opening the
+/// menu. [AnimatedWidget] handles the rebuliding whenever the animation
+/// triggers.
 class _BackdropTitle extends AnimatedWidget {
   final VoidCallback onPressed;
   final Widget frontTitle;
@@ -251,6 +298,16 @@ class _BackdropTitle extends AnimatedWidget {
   }
 }
 
+/// A custom icon that represents the Shrine theme.
+///
+/// When the animation is complete, [BrandedIcon] appears
+/// as a slanted menu with the Shrine logo beside it.
+/// When the aniamtion progress is 0.0, [BrandedIcon] appears
+/// as a lone Shrine logo.
+///
+/// This widget uses [Opacity] and [FractionalTranslation] to
+/// fade out the slanted menu and reposition the Shrine logo when
+/// the animation is triggered.
 class BrandedIcon extends StatelessWidget {
   const BrandedIcon({
     Key key,

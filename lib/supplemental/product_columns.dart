@@ -17,6 +17,11 @@ import 'package:flutter/material.dart';
 import '../model/product.dart';
 import 'product_card.dart';
 
+/// A column of two [ProductCard] objects.
+///
+/// Although not preferable, [TwoProductCardColumn] may be
+/// used to represent a single [ProductCard], which is useful
+/// if there is an even number of products in total.
 class TwoProductCardColumn extends StatelessWidget {
   TwoProductCardColumn({
     this.bottom,
@@ -38,6 +43,10 @@ class TwoProductCardColumn extends StatelessWidget {
           : 49 / 33;
 
       return ListView(
+        // ClampingScrollPhysics ensures that this ListView acts
+        // as a column under normal circumstances, however, since it
+        // is a list view, it will not raise an error if it is not
+        // given sufficient space to render.
         physics: const ClampingScrollPhysics(),
         children: <Widget>[
           Padding(
@@ -65,6 +74,7 @@ class TwoProductCardColumn extends StatelessWidget {
   }
 }
 
+/// A column of a single [ProductCard].
 class OneProductCardColumn extends StatelessWidget {
   OneProductCardColumn({this.product});
 

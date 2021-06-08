@@ -18,6 +18,12 @@ import 'package:intl/intl.dart';
 
 import '../model/product.dart';
 
+/// A card displaying information about a [Product]; allows for
+/// hero animations.
+///
+/// The [imageAspectRatio] parameter must not be null or negative.
+/// The price of the [Product] this wraps will be formatted automatically
+/// by [NumberFormat.SimpleCurrency] into the locale of the user.
 class ProductCard extends StatelessWidget {
   ProductCard({this.imageAspectRatio: 33 / 49, this.product})
       : assert(imageAspectRatio == null || imageAspectRatio > 0);

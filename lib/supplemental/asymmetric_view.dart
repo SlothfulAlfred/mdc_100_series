@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import '../model/product.dart';
 import 'product_columns.dart';
 
+/// A horizontal scrolling view of alternating 2 and 1 product columns.
 class AsymmetricView extends StatelessWidget {
   final List<Product> products;
 

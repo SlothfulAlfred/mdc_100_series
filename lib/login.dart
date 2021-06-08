@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 
+/// A login page that takes a username and password.
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -26,6 +27,11 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordFocus = FocusNode();
   final _unfocusedColor = Colors.grey[600];
 
+  /// Initializes listeners so that [setState] is called whenever
+  /// [_usernameFocus] or [_passwordFocus] changes.
+  ///
+  /// This is required so that the [TextField] widgets are
+  /// repainted using the [_unfocusedColor] if they lose focus.
   @override
   void initState() {
     super.initState();
@@ -114,6 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  // pops the login page off the stack, which shows
+                  // the home page.
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -126,5 +134,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-// TODO: Add AccentColorOverride (103)

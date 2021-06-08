@@ -14,7 +14,12 @@
 
 import 'product.dart';
 
+/// A database containing all available products.
+///
+/// All methods and variables are static so this class
+/// should not be initialized.
 class ProductsRepository {
+  /// A list of all products offered in Shrine.
   static const allProducts = <Product>[
     Product(
       category: Category.accessories,
@@ -284,13 +289,20 @@ class ProductsRepository {
     ),
   ];
 
+  /// Returns object at index [id] of [allProducts].
+  ///
+  /// Raises an error if the id is below 0 or out of the range
+  /// of [allProducts].
   static Product getById(int id) {
     assert(id >= 0);
     assert(id <= allProducts.length - 1);
     return allProducts[id];
   }
 
-// TODO: Refactor [getById] and [loadProducts] as async functions
+  // TODO: Refactor [getById] and [loadProducts] as async functions
+
+  /// Returns all items from [allProducts] that match the
+  /// given category.
   static List<Product> loadProducts(Category category) {
     if (category == Category.all) {
       return allProducts;

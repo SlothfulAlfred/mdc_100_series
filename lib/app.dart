@@ -24,6 +24,9 @@ import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
 import 'product_page.dart';
 
+/// The main Shrine app.
+///
+/// Holds the state of the currently selected category.
 class ShrineApp extends StatefulWidget {
   @override
   _ShrineAppState createState() => _ShrineAppState();
@@ -32,6 +35,7 @@ class ShrineApp extends StatefulWidget {
 class _ShrineAppState extends State<ShrineApp> {
   Category _currentCategory = Category.all;
 
+  /// Sets [_currentCategory] to the selected category.
   void _onCategoryTap(Category c) {
     setState(() {
       _currentCategory = c;
@@ -60,6 +64,11 @@ class _ShrineAppState extends State<ShrineApp> {
     );
   }
 
+  /// Parses a [RouteSettings] and pushes the correct [Route] to
+  /// the stack.
+  ///
+  /// Will throw an error if the route is not '/login', '/', or,
+  /// '/product/$id'.
   Route<dynamic> _getRoute(RouteSettings settings) {
     if (settings.name == '/login') {
       return MaterialPageRoute<void>(
@@ -83,6 +92,10 @@ class _ShrineAppState extends State<ShrineApp> {
 
 final ThemeData _kShrineTheme = _buildShrineTheme();
 
+/// Describes the main theme of the Shrine app.
+///
+/// Uses a primary color of pink with brown accents and a
+/// white background.
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
@@ -100,6 +113,7 @@ ThemeData _buildShrineTheme() {
       appBarTheme: base.appBarTheme.copyWith(
         backwardsCompatibility: false,
       ),
+      // This is what makes the [TextField] widgets octagonal.
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: CutCornersBorder(
           borderSide: BorderSide(
@@ -111,6 +125,10 @@ ThemeData _buildShrineTheme() {
       ));
 }
 
+/// Describes the Shrine text theme.
+///
+/// Changes certain text styles to the Rubik font
+/// and renders them in brown.
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
       .copyWith(

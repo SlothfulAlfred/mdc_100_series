@@ -14,8 +14,14 @@
 
 import 'package:flutter/foundation.dart';
 
-enum Category { all, accessories, clothing, home, }
+enum Category {
+  all,
+  accessories,
+  clothing,
+  home,
+}
 
+/// A model of a Shrine product.
 class Product {
   const Product({
     @required this.category,
@@ -29,13 +35,25 @@ class Product {
         assert(name != null),
         assert(price != null);
 
+  /// The category of this product.
   final Category category;
+
+  /// The identified of this product.
   final int id;
+
+  /// True if this product is featured.
   final bool isFeatured;
+
+  /// The name of this product.
   final String name;
+
+  /// The price of this product.
   final int price;
 
+  /// The name of this product's image.
   String get assetName => '$id-0.jpg';
+
+  /// The asset bundle of Shrine images.
   String get assetPackage => 'shrine_images';
 
   @override

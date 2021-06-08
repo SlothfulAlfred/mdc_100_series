@@ -4,6 +4,10 @@ import 'package:meta/meta.dart';
 import 'colors.dart';
 import 'model/product.dart';
 
+/// The menu page where categories are selected.
+///
+/// Builds all categories as [GestureDetector] widgets which
+/// change the state of [ShrineApp] when pressed.
 class CategoryMenuPage extends StatelessWidget {
   final Category currentCategory;
   final ValueChanged<Category> onCategoryTap;
@@ -14,6 +18,10 @@ class CategoryMenuPage extends StatelessWidget {
     @required this.onCategoryTap,
   });
 
+  /// Wraps the given [Category] in a [GestureDetector].
+  ///
+  /// If the [Category] is the [currentCategory], the [GestureDetector]
+  /// has a dark pink [Container] underlining it.
   Widget _buildCategory(Category category, BuildContext context) {
     final categoryString =
         category.toString().replaceAll('Category.', '').toUpperCase();
