@@ -33,7 +33,10 @@ For help getting started with Flutter, view our online
     * Learning points
     * Using [Hero] Widgets to implement cross-page animations 
 - [ ] Add widget unit tests for custom widgets
-- [ ] Fully document all methods 
+- [x] Fully document all methods 
+    * Learning points
+    * Writing concise summaries for classes and methods
+    * Learning to think from a user's perspective to know what is important enough to be documented
 - [ ] Add a cart / checkout page 
 - [ ] Use the Provider package to refactor some stateful widgets 
 - [ ] Refactor [ProductRepository] methods into async methods to better simulate a database 
