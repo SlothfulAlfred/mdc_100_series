@@ -293,25 +293,27 @@ class ProductsRepository {
   ///
   /// Raises an error if the id is below 0 or out of the range
   /// of [allProducts].
-  static Product getById(int id) {
-    try {
-      return allProducts[id];
-    } on RangeError {
-      return allProducts[0];
-    }
+  static Future<Product> getById(int id) {
+    return Future.delayed(Duration(seconds: 2), () {
+      try {
+        return allProducts[id];
+      } on RangeError {
+        return allProducts[0];
+      }
+    });
   }
-
-  // TODO: Refactor [getById] and [loadProducts] as async functions
 
   /// Returns all items from [allProducts] that match the
   /// given category.
-  static List<Product> loadProducts(Category category) {
-    if (category == Category.all) {
-      return allProducts;
-    } else {
-      return allProducts.where((Product p) {
-        return p.category == category;
-      }).toList();
-    }
+  static Future<List<Product>> loadProducts(Category category) {
+    return Future.delayed(Duration(seconds: 5), () {
+      if (category == Category.all) {
+        return allProducts;
+      } else {
+        return allProducts.where((Product p) {
+          return p.category == category;
+        }).toList();
+      }
+    });
   }
 }
