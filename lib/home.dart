@@ -19,13 +19,27 @@ import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
   final Category category;
-
-  const HomePage({this.category = Category.all});
+  Future items;
+  HomePage({this.category = Category.all})
+      : items = ProductsRepository.loadProducts(category);
 
   @override
   Widget build(BuildContext context) {
-    return AsymmetricView(
-      products: ProductsRepository.loadProducts(category),
-    );
+    return FutureBuilder(
+        future: items,
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return AsymmetricView(products: snapshot.data);
+          } else {
+            double width = MediaQuery.of(context).size.width * 0.35;
+            return Center(
+              child: Container(
+                child: CircularProgressIndicator(),
+                width: width,
+                height: width,
+              ),
+            );
+          }
+        });
   }
 }
