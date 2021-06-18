@@ -39,5 +39,10 @@ For help getting started with Flutter, view our online
     * Learning to think from a user's perspective to know what is important enough to be documented
 - [ ] Add a cart / checkout page 
 - [ ] Use the Provider package to refactor some stateful widgets 
-- [ ] Refactor [ProductRepository] methods into async methods to better simulate a database 
+- [x] Refactor [ProductRepository] methods into async methods to better simulate a database 
+    * Learning points
+    * Using [FutureBuilder] to handle [Future] objects
+    * Using the keywords  `async` and `await`
+    * Dealing with [Future] objects
+    * Using [CircularProgressIndicator] to create loading screens
 
