@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'colors.dart';
 import 'supplemental/photo_hero.dart';
 import 'model/products_repository.dart';
+import 'supplemental/loading_animation.dart';
 
 /// A page that displays information about, and animates, a single
 /// product.
@@ -59,6 +60,8 @@ class ProductPage extends StatelessWidget {
   Widget _createMainPage(context, data) {
     // size of the screen used as a [PhotoHero] parameter
     final sw = MediaQuery.of(context).size.width;
+    // height of the screen used to size the text
+    final sh = MediaQuery.of(context).size.height;
     // formats the price of the product
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         decimalDigits: 0, locale: Localizations.localeOf(context).toString());
@@ -74,21 +77,30 @@ class ProductPage extends StatelessWidget {
             child: PhotoHero(
                 onTap: () => Navigator.pop(context),
                 id: id,
-                width: sw * 13 / 16,
+                width: sw * 3 / 4,
                 child: _createImageWidget(data)),
           ),
         ),
-        SizedBox(height: 24),
-        // TODO: Change text style
+        SizedBox(height: 20),
         // TODO: Add buttons to change quantity of items bought
-        Text(
-          data.name,
-          style: theme.textTheme.headline4,
-        ),
-        Text(
-          formatter.format(data.price),
-          style: theme.textTheme.headline4,
-        ),
+        SizedBox(
+          height: sh * 0.15,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                data.name,
+                style: theme.textTheme.headline4,
+                maxLines: 1,
+              ),
+              Text(
+                formatter.format(data.price),
+                style: theme.textTheme.subtitle2,
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
@@ -99,7 +111,7 @@ class ProductPage extends StatelessWidget {
       child: Container(
         width: sw * 0.35,
         height: sw * 0.35,
-        child: CircularProgressIndicator(),
+        child: LoadingAnimation(), // CircularProgressIndicator(),
       ),
     );
   }

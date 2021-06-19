@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 import 'supplemental/asymmetric_view.dart';
+import 'supplemental/loading_animation.dart';
 
 class HomePage extends StatelessWidget {
   final Category category;
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
             double width = MediaQuery.of(context).size.width * 0.35;
             return Center(
               child: Container(
-                child: CircularProgressIndicator(),
+                child: LoadingAnimation(), // CircularProgressIndicator(),
                 width: width,
                 height: width,
               ),
