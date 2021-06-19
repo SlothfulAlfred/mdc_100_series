@@ -39,6 +39,11 @@ For help getting started with Flutter, view our online
     * Learning to think from a user's perspective to know what is important enough to be documented
 - [ ] Add a cart / checkout page 
 - [ ] Use the Provider package to refactor some stateful widgets 
+- [x] Make custom loading animation
+    * Learning Points
+    * Extending built-in classes and overriding methods to better fit your needs
+    * How to structure complex animations
+    * How to make never-ending animations
 - [x] Refactor [ProductRepository] methods into async methods to better simulate a database 
     * Learning points
     * Using [FutureBuilder] to handle [Future] objects
