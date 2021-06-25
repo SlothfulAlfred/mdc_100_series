@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import '../lib/model/products_repository.dart';
-import '../lib/model/product.dart';
+import '../../lib/model/products_repository.dart';
+import '../../lib/model/product.dart';
 
 void main() {
   test('getById should not fail if index is out of range', () async {

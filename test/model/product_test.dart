@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../lib/model/product.dart';
+import '../../lib/model/product.dart';
 
 void main() {
   test('asset name returns proper path', () {
