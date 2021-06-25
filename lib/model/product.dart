@@ -58,4 +58,10 @@ class Product {
 
   @override
   String toString() => "$name (id=$id)";
+
+  @override
+  int get hashCode => id;
+
+  @override
+  bool operator ==(Object other) => other is Product && other.id == this.id;
 }
