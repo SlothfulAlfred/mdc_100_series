@@ -14,13 +14,16 @@
 
 import 'package:Shrine/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'backdrop.dart';
+import 'cart.dart';
 import 'category_menu_page.dart';
 import 'colors.dart';
 import 'home.dart';
 import 'login.dart';
 import 'model/product.dart';
+import 'model/cart_model.dart';
 import 'supplemental/cut_corners_border.dart';
 import 'product_page.dart';
 
@@ -44,23 +47,26 @@ class _ShrineAppState extends State<ShrineApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shrine',
-      theme: _kShrineTheme,
-      home: Backdrop(
-        frontLayer: HomePage(
-          category: _currentCategory,
-        ),
-        backLayer: CategoryMenuPage(
-          onCategoryTap: _onCategoryTap,
+    return ChangeNotifierProvider(
+      create: (_) => CartModel(),
+      child: MaterialApp(
+        title: 'Shrine',
+        theme: _kShrineTheme,
+        home: Backdrop(
+          frontLayer: HomePage(
+            category: _currentCategory,
+          ),
+          backLayer: CategoryMenuPage(
+            onCategoryTap: _onCategoryTap,
+            currentCategory: _currentCategory,
+          ),
+          frontTitle: Text('SHRINE'),
+          backTitle: Text('MENU'),
           currentCategory: _currentCategory,
         ),
-        frontTitle: Text('SHRINE'),
-        backTitle: Text('MENU'),
-        currentCategory: _currentCategory,
+        initialRoute: '/login',
+        onGenerateRoute: _getRoute,
       ),
-      initialRoute: '/login',
-      onGenerateRoute: _getRoute,
     );
   }
 
@@ -75,6 +81,11 @@ class _ShrineAppState extends State<ShrineApp> {
         settings: settings,
         builder: (BuildContext context) => LoginPage(),
         fullscreenDialog: true,
+      );
+    } else if (settings.name == '/cart') {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (BuildContext context) => CartPage(),
       );
     } else {
       var uri = Uri.parse(settings.name);
