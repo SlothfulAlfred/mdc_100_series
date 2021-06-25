@@ -20,7 +20,7 @@ import 'supplemental/loading_animation.dart';
 
 class HomePage extends StatelessWidget {
   final Category category;
-  Future items;
+  final Future items;
   HomePage({this.category = Category.all})
       : items = ProductsRepository.loadProducts(category);
 
