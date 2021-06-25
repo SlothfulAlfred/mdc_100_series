@@ -14,11 +14,30 @@ class LoadingAniamtionState extends State<LoadingAnimation>
     with SingleTickerProviderStateMixin {
   // The main controller for all the animations
   AnimationController _controller;
-  // The animations
-  static Animation _circleOne;
-  static Animation _circleTwo;
-  static Animation _circleThree;
-  static Animation _circleFour;
+  // Tweens saved as static final variables to prevent
+  // rebuilding. Tweens are delayed by 25% of the animation
+  // relative to the previous Tween so that it creates
+  // a staggered effect.
+  static final _LoadingTween _circleOne = _LoadingTween(
+    begin: Offset(0, 0),
+    end: Offset(0, 1),
+    delay: 0.0,
+  );
+  static final _LoadingTween _circleTwo = _LoadingTween(
+    begin: Offset(0, 0),
+    end: Offset(0, 1),
+    delay: 0.25,
+  );
+  static final _LoadingTween _circleThree = _LoadingTween(
+    begin: Offset(0, 0),
+    end: Offset(0, 1),
+    delay: 0.5,
+  );
+  static final _LoadingTween _circleFour = _LoadingTween(
+    begin: Offset(0, 0),
+    end: Offset(0, 1),
+    delay: 0.75,
+  );
 
   @override
   void initState() {
@@ -28,32 +47,6 @@ class LoadingAniamtionState extends State<LoadingAnimation>
       duration: Duration(seconds: 1, milliseconds: 250),
       vsync: this,
     )..repeat();
-
-    // Each animation is delayed 0.25 seonds from the last
-    // This creates a staggered effect.
-    _circleOne = _LoadingTween(
-      begin: Offset(0, 0),
-      end: Offset(0, 1),
-      delay: 0.0,
-    ).animate(_controller);
-
-    _circleTwo = _LoadingTween(
-      begin: Offset(0, 0),
-      end: Offset(0, 1),
-      delay: 0.25,
-    ).animate(_controller);
-
-    _circleThree = _LoadingTween(
-      begin: Offset(0, 0),
-      end: Offset(0, 1),
-      delay: 0.5,
-    ).animate(_controller);
-
-    _circleFour = _LoadingTween(
-      begin: Offset(0, 0),
-      end: Offset(0, 1),
-      delay: 0.75,
-    ).animate(_controller);
   }
 
   /// Creates the circles that will be animated according to the
@@ -75,19 +68,19 @@ class LoadingAniamtionState extends State<LoadingAnimation>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SlideTransition(
-          position: _circleOne,
+          position: _circleOne.animate(_controller),
           child: _createCircle(sw),
         ),
         SlideTransition(
-          position: _circleTwo,
+          position: _circleTwo.animate(_controller),
           child: _createCircle(sw),
         ),
         SlideTransition(
-          position: _circleThree,
+          position: _circleThree.animate(_controller),
           child: _createCircle(sw),
         ),
         SlideTransition(
-          position: _circleFour,
+          position: _circleFour.animate(_controller),
           child: _createCircle(sw),
         ),
       ],
