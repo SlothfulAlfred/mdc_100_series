@@ -37,8 +37,14 @@ For help getting started with Flutter, view our online
     * Learning points
     * Writing concise summaries for classes and methods
     * Learning to think from a user's perspective to know what is important enough to be documented
-- [ ] Add a cart / checkout page 
-- [ ] Use the Provider package to refactor some stateful widgets 
+- [x] Add a cart / checkout page
+    * Learning points
+    * Using the Provider package to manage state
+    * Building models to deal with the business logic of the app
+- [x] Use the Provider package to refactor some stateful widgets 
+    * Learning points
+    * Using the Provider package to manage state
+    * Writing unit tests for classes that extend [ChangeNotifier]
 - [x] Make custom loading animation
     * Learning Points
     * Extending built-in classes and overriding methods to better fit your needs
@@ -50,4 +56,7 @@ For help getting started with Flutter, view our online
     * Using the keywords  `async` and `await`
     * Dealing with [Future] objects
     * Using [CircularProgressIndicator] to create loading screens
+- [ ] Use Firebase to create a user authentication system
+- [ ] Use Firestore to move [ProductsRepository] into a database
+- [ ] Learn about integration tests and write one if appropriate
 
