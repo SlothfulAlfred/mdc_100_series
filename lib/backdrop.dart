@@ -157,13 +157,13 @@ class _BackdropState extends State<Backdrop>
         ),
         IconButton(
           icon: Icon(
-            Icons.tune,
-            semanticLabel: 'login',
+            Icons.shopping_cart,
+            semanticLabel: 'cart',
           ),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
+              '/cart',
             );
           },
         ),
