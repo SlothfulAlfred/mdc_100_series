@@ -13,7 +13,10 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:Shrine/app.dart';
 
-void main() => runApp(ShrineApp());
+void main() async {
+  await Firebase.initializeApp();
+  runApp(ShrineApp());
+}
